@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Love Story</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #fffafc;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    .book {
+      width: 100vw;
+      height: 100vh;
+      perspective: 2000px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(120deg, #ffe4ec, #fdf6f9);
+    }
+
+    .page {
+      width: 80vw;
+      height: 90vh;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      transform-origin: left;
+      transform-style: preserve-3d;
+      transition: transform 1s;
+      position: absolute;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .page h1, .page h2 {
+      font-family: 'Great Vibes', cursive;
+      color: #e91e63;
+      margin-bottom: 1rem;
+    }
+
+    .page p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      line-height: 1.6;
+    }
+
+    .page img {
+      max-width: 300px;
+      border-radius: 12px;
+      margin-top: 1.5rem;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .buttons {
+      position: fixed;
+      bottom: 20px;
+      display: flex;
+      gap: 1rem;
+    }
+
+    button {
+      padding: 0.7rem 1.5rem;
+      background: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: #d81b60;
+    }
+  </style>
+</head>
+<body>
+  <audio id="bgMusic" autoplay loop>
+    <source src="data/Carla Morrison - Disfruto (letra).mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="book">
+    <div class="page" id="page">
+      <h1>Once upon a time...</h1>
+      <p>In a world full of people, A boy arrived to a new highschool. And that changed everything.</p>
+      <img src="data/0.jpg" alt="Page Image" />
+    </div>
+  </div>
+
+  <div class="buttons" style="left: 50%; transform: translateX(-50%);">
+    <button onclick="prevPage()">⟵ Back</button>
+    <button onclick="nextPage()">Next ⟶</button>
+    <button onclick="toggleMusic()">🎵 Music</button>
+  </div>
+
+  <script>
+    const pages = [
+      {
+        title: "Once upon a time...",
+        text: "In a world full of people, A boy arrived to a new highschool. And that changed everything.",
+        image: "data/0.jpg"
+      },
+      {
+        title: "First sight",
+        text: "I remember the first time I saw you. You were sitting in the last seat in the classroom, lost in your own world 🌍💭.",
+        image: "data/1.jpeg"
+      },
+      {
+        title: "developping feelings",
+        text: "My friends were bullying me, claiming that I love you ❤️ and that we are together. So I couldn't help but notice how your smile 😊 lit up the room ✨.",
+        image: "data/2.jpeg"
+      },
+      {
+        title: "you Noticing Me",
+        text: "Once, while my friends were bullying me, claiming that I love you ❤️, one of your friends heard that and told you 🗣️.",
+        image: "data/3.jpeg"
+      },
+      {
+        title: "my love to you",
+        text: "By the second year, I already had feelings for you 😍.",
+        image: "data/4.jpeg"
+      },
+      {
+        title: "you starting to like me",
+        text: "I was so happy when I found out that you liked me back. It felt like a dream come true. 💖✨😊🌟",
+        image: "data/6.png"
+      },
+      {
+        title: "First time you set next to me",
+        text: "I wanted to sit in the last seat 🪑 and so did you, but our argument was useless 😅, so we sat down together 👫.",
+        image: "data/7.png"
+      },
+      {
+        title: "The spider Incedent",
+        text: "I was sitting next to you 🪑 and we were sharing the same book 📖, when a spider 🕷️ jumped on the book. You were startled 😳 and asked me to move it away 🙈.",
+        image: "data/8.png"
+      },
+      {
+        title: "The book Incedent",
+        text: "I was sitting first in the class 🪑 when I needed a book 📚. I skipped all the other girls 🙋‍♀️ searching for you to lend me a book 🫣.",
+        image: "data/9.png"
+      },
+      {
+        title: "The third Year",
+        text: "The first time I saw you, you were wearing a black face mask 😷 and had an argument with the math teacher 🧑‍🏫📚.",
+        image: "data/16.jpg"
+      },
+      {
+        title: "THE Incedent",
+        text: "On 10/12/2020 📅, we were chatting on Messenger 💬 about a biology essay 🧬. You were sleepy 😴 and accidentally sent me 'Thnx bab ❤️.' 😳",
+        image: "data/11.png"
+      },
+      {
+        title: "THE Shock",
+        text: "I saw the message and couldn’t believe my eyes 😲 — she sent me this! My heart started beating fast ❤️‍🔥, and I didn’t know what to do 🤔. So, I called my friend on Messenger 📱 and told him the story. He encouraged me 🙌, and then I responded with, 'Anytime, babe ❤️.' .",
+        image: "data/10.png"
+      },
+      {
+        title: "Fisrt time we talked",
+        text: "I only said hi 👋 when the supervisor saw us 👀 and interrupted us 🚶‍♂️.",
+        image: "data/12.png"
+      },
+      {
+        title: "Fisrt Date",
+        text: "I waited for you in front of Starnet 🏢, and when you walked out, I couldn’t take my eyes off you 😍. You are the world to me ❤️ — especially in that red dress you were wearing 🔥👗. You took my breath away.",
+        image: "data/13.jpg"
+      },
+      {
+        title: "First Hug",
+        text: "When I hugged you for the first time, it felt like the world paused for a moment. All the noise faded, and all I could feel was the warmth of your embrace — safe, real, and unforgettable 🫠💖🫠. In that moment, nothing else mattered.",
+        image: "data/17.jpg"
+      },
+      {
+        title: "First time I Hold your hand",
+        text: "I was so nervous 😅, but when I held your hand 🫴, everything felt right 💞. It was like we were meant to be together ✨. I couldn't stop smiling 😊. I said in my brain, ''I can't let that hand go without leaving a memory,'' so I kissed it 💋. You were shocked 😳❤️.",
+        image: "data/14.jpg"
+      },
+      {
+        title: "First Kiss",
+        text: "We were in front of the private school 🏫, your friend was alone, so I told you to go be with her 👭. That’s when you came closer to me and gave me that unforgettable kiss 💋. I was so happy 😄, I couldn’t believe it — I was in heaven 😍😇.",
+        image: "data/15.jpg"
+      },
+      {
+        title: "First Gift",
+        text: "I got you a necklace 💖 as a little gift 🎁, just to show how much you mean to me 💫, and to rememberme always 🧠, I hope you liked it! 😘",
+        image: "data/18.jpg"
+      },
+      {
+        title: "The Little Things",
+        text: "Your sleepy voice 🥱, the way you hold my hand 🫶, your random giggles 🤭 — everything about you feels like home 🏡. It’s the little things that make me fall for you all over again 💖.",
+        image: "data/final.jpg"
+      },
+      {
+        title: "Forever Starts Here",
+        text: "This story isn’t over — it’s only the beginning 📖✨. I love you, endlessly ❤️♾️.",
+        image: "data/ChatGPT Image Apr 7, 2025, 10_55_48 PM.png"
+      }
+    ];
+
+    let current = 0;
+    const pageDiv = document.getElementById('page');
+
+    function renderPage(index) {
+      const p = pages[index];
+      pageDiv.innerHTML = `<h1>${p.title}</h1><p>${p.text}</p><img src="${p.image}" alt="Page Image" />`;
+    }
+
+    function nextPage() {
+      if (current < pages.length - 1) {
+        current++;
+        renderPage(current);
+      }
+    }
+
+    function prevPage() {
+      if (current > 0) {
+        current--;
+        renderPage(current);
+      }
+    }
+    function toggleMusic() {
+      const music = document.getElementById('bgMusic');
+      if (music.paused) {
+        music.play();
+      } else {
+        music.pause();
+      }
+    }
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            toggleMusic();
+        }, 500);
+    });
+
+    
+  </script>
+</body>
+</html>

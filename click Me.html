@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lovers Login</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffd6e8, #ffe6f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .login-container {
+      background: white;
+      padding: 2rem 3rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .login-container h1 {
+      margin-bottom: 1rem;
+      color: #d6336c;
+      font-size: 2rem;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .login-container button {
+      background: #ff6699;
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background 0.3s;
+    }
+
+    .login-container button:hover {
+      background: #e05588;
+    }
+
+    .heart {
+      font-size: 2rem;
+      color: #ff3366;
+      margin-bottom: 1rem;
+    }
+
+    .footer {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="heart">💖</div>
+    <h1>Welcome, Lovebirds</h1>
+    <form>
+      <input type="text" placeholder="Your Name" required />
+      <input type="password" placeholder="Secret Code" required />
+      <button type="submit">Enter Our World</button>
+    </form>
+    <div class="footer">
+      Made with ❤️ for Soulmates
+    </div>
+  </div>
+  <script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent form submission
+
+        const name = document.querySelector('input[type="text"]').value;
+        const password = document.querySelector('input[type="password"]').value;
+
+        if ((name === 'nada' || name === 'Nada' || name === 'NADA') && (password === 'alaa' || password === 'Alaa' || password === 'ALAA')) {
+            alert('Welcome to our secret world!');
+            window.location.href = 'data/main.html';
+        } else {
+            alert('Invalid credentials. Please try again.');
+        }
+    });
+  </script>
+</body>
+</html>
