@@ -216,7 +216,7 @@
       },
       {
         title: "THE Incedent",
-        text: "On 10/12/2020 📅, we were chatting on Messenger 💬 about a biology essay 🧬. You were sleepy 😴 and accidentally sent me 'Thnx bab ❤️.' 😳",
+        text: "On 10/12/2020 📅, we were chatting on Messenger 💬 about a biology essay 🧬. You were sleepy 😴 and accidentally sent me 'Thnx bae ❤️.' 😳",
         image: "data/11.png"
       },
       {
@@ -309,7 +309,11 @@
     }
     window.addEventListener('load', () => {
         setTimeout(() => {
-            toggleMusic();
+          const music = document.getElementById('bgMusic');
+          if (music.paused) {
+        music.play();
+      }
+          
         }, 500);
     });
 
