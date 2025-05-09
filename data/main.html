@@ -88,9 +88,8 @@
       background: #d81b60;
     }
 
-    /* Heart animation styles */
     .heart-container {
-      position: fixed; /* Changed from absolute to fixed */
+      position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
@@ -139,6 +138,29 @@
         opacity: 0;
       }
     }
+
+    .intro {
+      position: absolute;
+      top: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      max-width: 90vw;
+      z-index: 2000;
+    }
+
+    .intro h2 {
+      font-family: 'Great Vibes', cursive;
+      margin-bottom: 1rem;
+    }
+
+    .intro button {
+      margin: 0.5rem;
+    }
   </style>
 </head>
 <body>
@@ -147,11 +169,18 @@
     Your browser does not support the audio element.
   </audio>
 
+  <div class="intro" id="intro">
+    <h2>Choose a question to begin our story...</h2>
+    <button onclick="goToPage(0)">How did it all start?</button>
+    <button onclick="goToPage(6)">When did we sit together?</button>
+    <button onclick="goToPage(10)">What was the shocking moment?</button>
+    <button onclick="goToPage(14)">Our first date?</button>
+    <button onclick="startStory()">Read from beginning ➤</button>
+  </div>
+
   <div class="book">
     <div class="page" id="page">
-      <h1>Once upon a time...</h1>
-      <p>In a world full of people, A boy arrived to a new highschool. And that changed everything.</p>
-      <img src="data/0.jpg" alt="Page Image" />
+      <!-- Page content will be rendered here -->
     </div>
   </div>
 
@@ -159,116 +188,33 @@
     <button onclick="prevPage()">⟵ Back</button>
     <button onclick="nextPage()">Next ⟶</button>
     <button onclick="toggleMusic()">🎵 Music</button>
+    <br>
     <button id="heartButton" onclick="triggerHeartAnimation()" style="display: none;">💖 Show Love</button>
   </div>
 
   <script>
     const pages = [
-      {
-        title: "Once upon a time...",
-        text: "In a world full of people, A boy arrived to a new highschool. And that changed everything.",
-        image: "data/0.jpg"
-      },
-      {
-        title: "First sight",
-        text: "I remember the first time I saw you. You were sitting in the last seat in the classroom, lost in your own world 🌍💭.",
-        image: "data/1.jpeg"
-      },
-      {
-        title: "developping feelings",
-        text: "My friends were bullying me, claiming that I love you ❤️ and that we are together. So I couldn't help but notice how your smile 😊 lit up the room ✨.",
-        image: "data/2.jpeg"
-      },
-      {
-        title: "you Noticing Me",
-        text: "Once, while my friends were bullying me, claiming that I love you ❤️, one of your friends heard that and told you 🗣️.",
-        image: "data/3.jpeg"
-      },
-      {
-        title: "my love to you",
-        text: "By the second year, I already had feelings for you 😍.",
-        image: "data/4.jpeg"
-      },
-      {
-        title: "you starting to like me",
-        text: "I was so happy when I found out that you liked me back. It felt like a dream come true. 💖✨😊🌟",
-        image: "data/6.png"
-      },
-      {
-        title: "First time you set next to me",
-        text: "I wanted to sit in the last seat 🪑 and so did you, but our argument was useless 😅, so we sat down together 👫.",
-        image: "data/7.png"
-      },
-      {
-        title: "The spider Incedent",
-        text: "I was sitting next to you 🪑 and we were sharing the same book 📖, when a spider 🕷️ jumped on the book. You were startled 😳 and asked me to move it away 🙈.",
-        image: "data/8.png"
-      },
-      {
-        title: "The book Incedent",
-        text: "I was sitting first in the class 🪑 when I needed a book 📚. I skipped all the other girls 🙋‍♀️ searching for you to lend me a book 🫣.",
-        image: "data/9.png"
-      },
-      {
-        title: "The third Year",
-        text: "The first time I saw you, you were wearing a black face mask 😷 and had an argument with the math teacher 🧑‍🏫📚.",
-        image: "data/16.jpg"
-      },
-      {
-        title: "THE Incedent",
-        text: "On 10/12/2020 📅, we were chatting on Messenger 💬 about a biology essay 🧬. You were sleepy 😴 and accidentally sent me 'Thnx bae ❤️.' 😳",
-        image: "data/11.png"
-      },
-      {
-        title: "THE Shock",
-        text: "I saw the message and couldn’t believe my eyes 😲 — she sent me this! My heart started beating fast ❤️‍🔥, and I didn’t know what to do 🤔. So, I called my friend on Messenger 📱 and told him the story. He encouraged me 🙌, and then I responded with, 'Anytime, babe ❤️.' .",
-        image: "data/10.png"
-      },
-      {
-        title: "Fisrt time we talked",
-        text: "I only said hi 👋 when the supervisor saw us 👀 and interrupted us 🚶‍♂️.",
-        image: "data/12.png"
-      },
-      {
-        title: "Fisrt Date",
-        text: "I waited for you in front of Starnet 🏢, and when you walked out, I couldn’t take my eyes off you 😍. You are the world to me ❤️ — especially in that red dress you were wearing 🔥👗. You took my breath away.",
-        image: "data/13.jpg"
-      },
-      {
-        title: "First Hug",
-        text: "When I hugged you for the first time, it felt like the world paused for a moment. All the noise faded, and all I could feel was the warmth of your embrace — safe, real, and unforgettable 🫠💖🫠. In that moment, nothing else mattered.",
-        image: "data/17.jpg"
-      },
-      {
-        title: "First time I Hold your hand",
-        text: "I was so nervous 😅, but when I held your hand 🫴, everything felt right 💞. It was like we were meant to be together ✨. I couldn't stop smiling 😊. I said in my brain, ''I can't let that hand go without leaving a memory,'' so I kissed it 💋. You were shocked 😳❤️.",
-        image: "data/14.jpg"
-      },
-      {
-        title: "the pancil Incedent",
-        text: "You sat beside me 🪑, fidgeting with your pencil ✏️, and it kept grabbing my attention 👀. You dropped it several times, and each time I picked it up. On the last one, I handed it back, gave your hand a playful squeeze 😠, and told you to hold it still. That tiny moment somehow became unforgettable.",
-        image: "data/n1.jpeg"
-      },
-      {
-        title: "First Kiss",
-        text: "We were in front of the private school 🏫, your friend was alone, so I told you to go be with her 👭. That’s when you came closer to me and gave me that unforgettable kiss 💋. I was so happy 😄, I couldn’t believe it — I was in heaven 😍😇.",
-        image: "data/15.jpg"
-      },
-      {
-        title: "First Gift",
-        text: "I got you a necklace 💖 as a little gift 🎁, just to show how much you mean to me 💫, and to rememberme always 🧠, I hope you liked it! 😘",
-        image: "data/18.jpg"
-      },
-      {
-        title: "The Little Things",
-        text: "Your sleepy voice 🥱, the way you hold my hand 🫶, your random giggles 🤭 — everything about you feels like home 🏡. It’s the little things that make me fall for you all over again 💖.",
-        image: "data/final.jpg"
-      },
-      {
-        title: "Forever Starts Here",
-        text: "This story isn’t over — it’s only the beginning 📖✨. I love you, endlessly ❤️♾️.",
-        image: "data/ChatGPT Image Apr 7, 2025, 10_55_48 PM.png"
-      }
+      { title: "Once upon a time...", text: "In a world full of people, A boy arrived to a new highschool. And that changed everything.", image: "data/0.jpg" },
+      { title: "First sight", text: "I remember the first time I saw you. You were sitting in the last seat in the classroom, lost in your own world 🌍💭.", image: "data/1.jpeg" },
+      { title: "developping feelings", text: "My friends were bullying me, claiming that I love you ❤️ and that we are together. So I couldn't help but notice how your smile 😊 lit up the room ✨.", image: "data/2.jpeg" },
+      { title: "you Noticing Me", text: "Once, while my friends were bullying me, claiming that I love you ❤️, one of your friends heard that and told you 🗣️.", image: "data/3.jpeg" },
+      { title: "my love to you", text: "By the second year, I already had feelings for you 😍.", image: "data/4.jpeg" },
+      { title: "you starting to like me", text: "I was so happy when I found out that you liked me back. It felt like a dream come true. 💖✨😊🌟", image: "data/6.png" },
+      { title: "First time you set next to me", text: "I wanted to sit in the last seat 🪑 and so did you, but our argument was useless 😅, so we sat down together 👫.", image: "data/7.png" },
+      { title: "The spider Incedent", text: "I was sitting next to you 🪑 and we were sharing the same book 📖, when a spider 🕷️ jumped on the book. You were startled 😳 and asked me to move it away 🙈.", image: "data/8.png" },
+      { title: "The book Incedent", text: "I was sitting first in the class 🪑 when I needed a book 📚. I skipped all the other girls 🙋‍♀️ searching for you to lend me a book 🫣.", image: "data/9.png" },
+      { title: "The third Year", text: "The first time I saw you, you were wearing a black face mask 😷 and had an argument with the math teacher 🧑‍🏫📚.", image: "data/16.jpg" },
+      { title: "THE Incedent", text: "On 10/12/2020 📅, we were chatting on Messenger 💬 about a biology essay 🧬. You were sleepy 😴 and accidentally sent me 'Thnx bae ❤️.' 😳", image: "data/11.png" },
+      { title: "THE Shock", text: "I saw the message and couldn’t believe my eyes 😲 — she sent me this! My heart started beating fast ❤️‍🔥, and I didn’t know what to do 🤔. So, I called my friend on Messenger 📱 and told him the story. He encouraged me 🙌, and then I responded with, 'Anytime, babe ❤️.' .", image: "data/10.png" },
+      { title: "Fisrt time we talked", text: "I only said hi 👋 when the supervisor saw us 👀 and interrupted us 🚶‍♂️.", image: "data/12.png" },
+      { title: "Fisrt Date", text: "I waited for you in front of Starnet 🏢, and when you walked out, I couldn’t take my eyes off you 😍. You are the world to me ❤️ — especially in that red dress you were wearing 🔥👗. You took my breath away.", image: "data/13.jpg" },
+      { title: "First Hug", text: "When I hugged you for the first time, it felt like the world paused for a moment. All the noise faded, and all I could feel was the warmth of your embrace — safe, real, and unforgettable 🫠💖🫠. In that moment, nothing else mattered.", image: "data/17.jpg" },
+      { title: "First time I Hold your hand", text: "I was so nervous 😅, but when I held your hand 🫴, everything felt right 💞. It was like we were meant to be together ✨. I couldn't stop smiling 😊. I said in my brain, ''I can't let that hand go without leaving a memory,'' so I kissed it 💋. You were shocked 😳❤️.", image: "data/14.jpg" },
+      { title: "the pancil Incedent", text: "You sat beside me 🪑, fidgeting with your pencil ✏️, and it kept grabbing my attention 👀. You dropped it several times, and each time I picked it up. On the last one, I handed it back, gave your hand a playful squeeze 😠, and told you to hold it still. That tiny moment somehow became unforgettable.", image: "data/n1.jpeg" },
+      { title: "First Kiss", text: "We were in front of the private school 🏫, your friend was alone, so I told you to go be with her 👭. That’s when you came closer to me and gave me that unforgettable kiss 💋. I was so happy 😄, I couldn’t believe it — I was in heaven 😍😇.", image: "data/15.jpg" },
+      { title: "First Gift", text: "I got you a necklace 💖 as a little gift 🎁, just to show how much you mean to me 💫, and to rememberme always 🧠, I hope you liked it! 😘", image: "data/18.jpg" },
+      { title: "The Little Things", text: "Your sleepy voice 🥱, the way you hold my hand 🫶, your random giggles 🤭 — everything about you feels like home 🏡. It’s the little things that make me fall for you all over again 💖.", image: "data/final.jpg" },
+      { title: "Forever Starts Here", text: "This story isn’t over — it’s only the beginning 📖✨. I love you, endlessly ❤️♾️.", image: "data/ChatGPT Image Apr 7, 2025, 10_55_48 PM.png" }
     ];
 
     let current = 0;
@@ -299,6 +245,17 @@
         renderPage(current);
       }
     }
+
+    function goToPage(index) {
+      current = index;
+      document.getElementById('intro').style.display = 'none';
+      renderPage(current);
+    }
+
+    function startStory() {
+      goToPage(0);
+    }
+
     function toggleMusic() {
       const music = document.getElementById('bgMusic');
       if (music.paused) {
@@ -307,40 +264,31 @@
         music.pause();
       }
     }
+
     window.addEventListener('load', () => {
-        setTimeout(() => {
-          const music = document.getElementById('bgMusic');
-          if (music.paused) {
-        music.play();
-      }
-          
-        }, 500);
+      setTimeout(() => {
+        const music = document.getElementById('bgMusic');
+        if (music.paused) music.play();
+      }, 500);
     });
 
-    // Add this JavaScript for the heart animation
     function triggerHeartAnimation() {
       const heartContainer = document.createElement('div');
       heartContainer.classList.add('heart-container');
-      document.body.appendChild(heartContainer); // Append directly to the body
+      document.body.appendChild(heartContainer);
 
       for (let i = 0; i < 30; i++) {
         const heart = document.createElement('div');
         heart.classList.add('heart');
-        heart.style.left = `${Math.random() * 100}vw`; // Random horizontal position
-        heart.style.top = `${Math.random() * 100}vh`; // Random vertical position
-        heart.style.animationDelay = `${Math.random() * 2}s`; // Random animation delay
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.top = `${Math.random() * 100}vh`;
+        heart.style.animationDelay = `${Math.random() * 2}s`;
         heartContainer.appendChild(heart);
 
-        // Remove the heart after animation ends
-        setTimeout(() => {
-          heart.remove();
-        }, 5000);
+        setTimeout(() => heart.remove(), 5000);
       }
 
-      // Remove the container after animation ends
-      setTimeout(() => {
-        heartContainer.remove();
-      }, 5000);
+      setTimeout(() => heartContainer.remove(), 5000);
     }
   </script>
 </body>
