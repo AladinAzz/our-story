@@ -87,6 +87,58 @@
     button:hover {
       background: #d81b60;
     }
+
+    /* Heart animation styles */
+    .heart-container {
+      position: fixed; /* Changed from absolute to fixed */
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1000;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #e91e63;
+      transform: rotate(45deg);
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #e91e63;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(0) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-200px) rotate(45deg);
+        opacity: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -107,6 +159,7 @@
     <button onclick="prevPage()">⟵ Back</button>
     <button onclick="nextPage()">Next ⟶</button>
     <button onclick="toggleMusic()">🎵 Music</button>
+    <button id="heartButton" onclick="triggerHeartAnimation()" style="display: none;">💖 Show Love</button>
   </div>
 
   <script>
@@ -192,6 +245,11 @@
         image: "data/14.jpg"
       },
       {
+        title: "the pancil Incedent",
+        text: "You sat beside me 🪑, fidgeting with your pencil ✏️, and it kept grabbing my attention 👀. You dropped it several times, and each time I picked it up. On the last one, I handed it back, gave your hand a playful squeeze 😠, and told you to hold it still. That tiny moment somehow became unforgettable.",
+        image: "data/n1.jpeg"
+      },
+      {
         title: "First Kiss",
         text: "We were in front of the private school 🏫, your friend was alone, so I told you to go be with her 👭. That’s when you came closer to me and gave me that unforgettable kiss 💋. I was so happy 😄, I couldn’t believe it — I was in heaven 😍😇.",
         image: "data/15.jpg"
@@ -219,6 +277,13 @@
     function renderPage(index) {
       const p = pages[index];
       pageDiv.innerHTML = `<h1>${p.title}</h1><p>${p.text}</p><img src="${p.image}" alt="Page Image" />`;
+
+      const heartButton = document.getElementById('heartButton');
+      if (index === pages.length - 1) {
+        heartButton.style.display = 'inline-block';
+      } else {
+        heartButton.style.display = 'none';
+      }
     }
 
     function nextPage() {
@@ -248,7 +313,31 @@
         }, 500);
     });
 
-    
+    // Add this JavaScript for the heart animation
+    function triggerHeartAnimation() {
+      const heartContainer = document.createElement('div');
+      heartContainer.classList.add('heart-container');
+      document.body.appendChild(heartContainer); // Append directly to the body
+
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = `${Math.random() * 100}vw`; // Random horizontal position
+        heart.style.top = `${Math.random() * 100}vh`; // Random vertical position
+        heart.style.animationDelay = `${Math.random() * 2}s`; // Random animation delay
+        heartContainer.appendChild(heart);
+
+        // Remove the heart after animation ends
+        setTimeout(() => {
+          heart.remove();
+        }, 2000);
+      }
+
+      // Remove the container after animation ends
+      setTimeout(() => {
+        heartContainer.remove();
+      }, 2000);
+    }
   </script>
 </body>
 </html>
