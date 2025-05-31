@@ -34,21 +34,18 @@
 
     .heart {
       position: absolute;
-      width: 30px;
-      height: 30px;
-      background-image: url('https://upload.wikimedia.org/wikipedia/commons/3/3e/Broken_heart_symbol.svg');
-      background-size: cover;
+      font-size: 30px;
       animation: floatUp 6s linear infinite;
       opacity: 0.7;
     }
 
     @keyframes floatUp {
       0% {
-        transform: translateY(100vh) scale(0.5) rotate(0deg);
+        transform: translateY(100vh) scale(0.5);
         opacity: 0.7;
       }
       100% {
-        transform: translateY(-10vh) scale(1.2) rotate(360deg);
+        transform: translateY(-10vh) scale(1.2);
         opacity: 0;
       }
     }
@@ -61,6 +58,7 @@
     function createHeart() {
       const heart = document.createElement('div');
       heart.classList.add('heart');
+      heart.textContent = '💔';
       heart.style.left = Math.random() * 100 + 'vw';
       heart.style.animationDuration = 4 + Math.random() * 3 + 's';
       heart.style.opacity = Math.random();
@@ -68,10 +66,10 @@
 
       setTimeout(() => {
         heart.remove();
-      }, 7000);
+      }, 7500);
     }
 
-    setInterval(createHeart, 500);
+    setInterval(createHeart, 100);
   </script>
 </body>
 </html>
